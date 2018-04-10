@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.4.3'
 
+
+
+gem 'chartkick'
+gem 'groupdate'
 gem 'devise'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
