@@ -1,0 +1,11 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+
+<h3 class="text-center">Routes and destination</h3>
+
+<%= pie_chart [["China", 2],["Sweden", 5]] %>
+
+
+
+<h3 class="text-center">Most popular times of Bookings</h3>
+<%= column_chart Booking.group_by_hour_of_day(:created_at, format: "%l %P").count %>
