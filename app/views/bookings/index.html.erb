@@ -1,2 +1,28 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
+  <h2 class="text-center">Booking Summary</h2>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td>Booking ID</td>
+        <td>Company</td>
+        <td>From</td>
+        <td>To</td>
+        <td>MOT</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookings.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= b.user.company %></td>
+        <td><%= b.route.from %></td>
+        <td><%= b.route.to %></td>
+        <td><%= b.transport %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

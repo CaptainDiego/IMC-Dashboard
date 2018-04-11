@@ -1,11 +1,22 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
 
-<h3 class="text-center">Routes and destination</h3>
+<h3 class="text-center">Most Popular Freight Hubs</h3>
 
-<%= pie_chart [["China", 2],["Sweden", 5]] %>
+
+<% @antwerp = Route.where(from:"Antwerp Port, Belgium") %>
+<% @hamburg = Route.where(to: "Hamburg Hafen, Germany") %>
+<% @gothenburg = Route.where(from: "Gothenburg Port, Sweden") %>
+
+<%= geo_chart [["Antwerp", Booking.where(route: @antwerp).count], ["Gothenburg", Booking.where(route: @gothenburg).count], ["Hamburg", Booking.where(route: @hamburg).count]], library: {displayMode: "markers", colorAxis: {colors: ['#e7711c', '#4374e0']}, sizeAxis: { minValue: 0, maxValue: 100 }}, id: "map-chart", height: "100vh" %>
+
+
+<h3 class="text-center">Most popular mode of transport</h3>
+
+<%= pie_chart [["Rail", Booking.where(transport: 'Rail').count],["Ocean", Booking.where(transport: 'Ocean').count], ["Air", Booking.where(transport: 'Air').count], donut: true ] %>
 
 
 
 <h3 class="text-center">Most popular times of Bookings</h3>
-<%= column_chart Booking.group_by_hour_of_day(:created_at, format: "%l %P").count %>
+<%= area_chart Booking.group_by_hour_of_day(:created_at, format: "%l %P").count %>
+
