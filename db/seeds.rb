@@ -19,6 +19,7 @@ puts 'Creating routes'
 route1 = Route.create(from: 'Gothenburg Port, Sweden', to: 'Shanghai Port, China')
 route2 = Route.create(from: 'Antwerp Port, Belgium', to: 'Port Arthur, USA')
 route3 = Route.create(from: 'Antwerp Port, Belgium', to: 'Hamburg Hafen, Germany')
+route4 = Route.create(from: 'Shanghai', to: 'Duisburg')
 
 
 puts 'Creating Users'
@@ -35,12 +36,20 @@ rail = 'Rail'
 
 puts 'Creating Bookings'
 
-Booking.create(user: User1, route: route1, transport: ocean)
-Booking.create(user: User2, route: route1, transport: ocean)
-Booking.create(user: User3, route: route1, transport: ocean)
-Booking.create(user: User3, route: route2, transport: ocean)
-Booking.create(user: User3, route: route2, transport: air)
-Booking.create(user: User2, route: route3, transport: rail)
+b1 = Booking.create(user: User1, route: route1, transport: ocean, freight: 1590 )
+b1.update_attribute :created_at, (rand*10).days.ago
+b2 = Booking.create(user: User2, route: route1, transport: ocean, freight: 1780)
+b2.update_attribute :created_at, (rand*10).days.ago
+b3 = Booking.create(user: User3, route: route1, transport: ocean, freight: 1460)
+b3.update_attribute :created_at, (rand*10).days.ago
+b4 = Booking.create(user: User3, route: route2, transport: ocean, freight: 1210)
+b4.update_attribute :created_at, (rand*10).days.ago
+b5 = Booking.create(user: User3, route: route2, transport: air, freight: 1320)
+b5.update_attribute :created_at, (rand*10).days.ago
+b6 = Booking.create(user: User2, route: route3, transport: rail, freight: 2220)
+b6.update_attribute :created_at, (rand*10).days.ago
+b7 = Booking.create(user: User2, route: route4, transport: ocean, freight: 1580)
+b7.update_attribute :created_at, (rand*10).days.ago
 
 
 puts 'Done!'
