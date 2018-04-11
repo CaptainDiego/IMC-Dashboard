@@ -30,3 +30,6 @@
   </div>
 </div>
 
+<h4 class="text-center">Freight sold</h4>
+<%= line_chart Booking.group_by_day(:created_at).sum(:freight), xtitle: "Day", ytitle: "Freight in €" %>
+
