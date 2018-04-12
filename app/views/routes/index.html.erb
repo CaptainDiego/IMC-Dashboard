@@ -1,35 +1,31 @@
-<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-
-
-
 
 <% @antwerp = Route.where(from:"Antwerp Port, Belgium") %>
 <% @hamburg = Route.where(to: "Hamburg Hafen, Germany") %>
 <% @gothenburg = Route.where(from: "Gothenburg Port, Sweden") %>
 
+<h4 class="text-center">Freight sold</h4>
+<%= line_chart Booking.group_by_day(:created_at).sum(:freight), xtitle: "Day", ytitle: "Freight in €", height: "30vh", label: "Freight in €" %>
 
 <div class="container">
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <h4 class="text-center">Most Popular Freight Hubs</h4>
-      <br>
-      <%= geo_chart [["Antwerp", Booking.where(route: @antwerp).count], ["Gothenburg", Booking.where(route: @gothenburg).count], ["Hamburg", Booking.where(route: @hamburg).count]], library: {displayMode: "markers", sizeAxis: { minValue: 0, maxValue: 10 }}, id: "map-chart", height: "75vh"%>
-    </div>
-  </div>
   <div class="row" id="second-row">
     <div class="col-xs-6">
       <br>
       <h4 class="text-center">Most popular MOT</h4>
-      <%= pie_chart [["Rail", Booking.where(transport: 'Rail').count],["Ocean", Booking.where(transport: 'Ocean').count], ["Air", Booking.where(transport: 'Air').count]], donut: true%>
+      <%= pie_chart [["Rail", Booking.where(transport: 'Rail').count],["Ocean", Booking.where(transport: 'Ocean').count], ["Air", Booking.where(transport: 'Air').count]], donut: true, height: "40vh"%>
     </div>
     <div class="col-xs-6">
       <br>
       <h4 class="text-center">Bookings per day</h4>
-        <%= column_chart Booking.group_by_day_of_week(:created_at, format: "%a").count, xtitle: "Day", ytitle: "Booking" %>
+        <%= column_chart Booking.group_by_day_of_week(:created_at, format: "%a").count, xtitle: "Day", ytitle: "Booking", height: "40vh" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <h4 class="text-center">Most Popular Freight Hubs</h4>
+      <br>
+      <br>
+      <%= geo_chart [["Antwerp", Booking.where(route: @antwerp).count], ["Gothenburg", Booking.where(route: @gothenburg).count], ["Hamburg", Booking.where(route: @hamburg).count]], library: {displayMode: "markers", sizeAxis: { minValue: 0, maxValue: 10 }}, label: "Departures", id: "map-chart", height: "75vh"%>
     </div>
   </div>
 </div>
-
-<h4 class="text-center">Freight sold</h4>
-<%= line_chart Booking.group_by_day(:created_at).sum(:freight), xtitle: "Day", ytitle: "Freight in €" %>
 
