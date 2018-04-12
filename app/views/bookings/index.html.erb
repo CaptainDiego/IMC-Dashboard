@@ -27,4 +27,8 @@
 
 
 <h3 class="text-center">Most popular times of Bookings</h3>
-<%= area_chart Booking.group_by_hour_of_day(:created_at, format: "%l %P").count, xtitle: "Time", ytitle: "Booking", , label: "Booking" %>
+<%= area_chart Booking.group_by_hour_of_day(:created_at, format: "%l %P").count, xtitle: "Time", ytitle: "Booking", label: "Booking", min: 0 , max: 7 %>
+
+
+
+
