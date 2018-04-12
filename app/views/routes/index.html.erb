@@ -1,4 +1,8 @@
 
+<%= javascript_include_tag "//maps.google.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}" %>
+
+
+
 <% @antwerp = Route.where(from:"Antwerp Port, Belgium") %>
 <% @hamburg = Route.where(to: "Hamburg Hafen, Germany") %>
 <% @gothenburg = Route.where(from: "Gothenburg Port, Sweden") %>
@@ -28,8 +32,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  Chartkick.configure({mapsApiKey: "secret"})
-</script>
 
