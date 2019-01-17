@@ -7,7 +7,7 @@
 <% @hamburg = Route.where(to: "Hamburg Hafen, Germany") %>
 <% @gothenburg = Route.where(from: "Gothenburg Port, Sweden") %>
 
-<h4 class="text-center">Freight sold</h4>
+<h4 class="text-center">Cargo Sold</h4>
 <%= line_chart Booking.group_by_day(:created_at).sum(:freight), xtitle: "Day", ytitle: "Freight in €", height: "30vh", label: "Freight in €" %>
 
 <div class="container">
